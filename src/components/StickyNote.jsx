@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Trash2 } from 'lucide-react';
 
@@ -11,15 +11,14 @@ export default function StickyNote({ containerRef, note, pageId, onUpdateNote, o
     const container = containerRef.current;
     if (!el || !container) return;
 
-    // Calculate new left/top percentages based on bounding boxes
     const elRect = el.getBoundingClientRect();
     const cRect = container.getBoundingClientRect();
 
-    const centerX = elRect.left - cRect.left; // left offset
-    const centerY = elRect.top - cRect.top; // top offset
+    const left = elRect.left - cRect.left;
+    const top = elRect.top - cRect.top;
 
-    const px = (centerX / cRect.width) * 100;
-    const py = (centerY / cRect.height) * 100;
+    const px = (left / cRect.width) * 100;
+    const py = (top / cRect.height) * 100;
 
     const clampedX = clamp(px, 0, 95);
     const clampedY = clamp(py, 0, 95);
@@ -29,7 +28,6 @@ export default function StickyNote({ containerRef, note, pageId, onUpdateNote, o
 
   const handleFocus = () => onBringNoteToFront(pageId, note.id);
 
-  // Constrain to container
   const constraints = containerRef;
 
   return (
@@ -58,7 +56,7 @@ export default function StickyNote({ containerRef, note, pageId, onUpdateNote, o
           onFocus={() => setEditing(true)}
           onBlur={() => setEditing(false)}
           placeholder="Write note..."
-          className="w-full h-28 md:h-32 bg-transparent resize-none p-3 text-sm outline-none font-[\"IBM Plex Sans\",_ui-sans-serif] text-stone-800"
+          className="w-full h-28 md:h-32 bg-transparent resize-none p-3 text-sm outline-none font-sans text-stone-800"
         />
         <div className="absolute top-1 right-1 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
           <button

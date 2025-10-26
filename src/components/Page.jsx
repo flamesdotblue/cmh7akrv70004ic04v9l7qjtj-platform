@@ -22,7 +22,7 @@ export default function Page({ side, page, addStickyMode, onAddStickyAt, onUpdat
             <h3 className="font-serif text-lg md:text-xl tracking-wide">{page.title}</h3>
             <span className="text-xs md:text-sm">{page.date}</span>
           </header>
-          <div className="prose prose-stone max-w-none pt-3 text-sm md:text-base leading-relaxed whitespace-pre-wrap font-["IBM Plex Sans",_ui-sans-serif]">
+          <div className="prose prose-stone max-w-none pt-3 text-sm md:text-base leading-relaxed whitespace-pre-wrap font-sans">
             {page.content || 'Write your diary entry here...'}
           </div>
 
